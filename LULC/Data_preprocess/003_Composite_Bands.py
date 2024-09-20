@@ -4,8 +4,8 @@ from tqdm import tqdm
 import numpy as np
 
 # 输入输出路径
-pathin = r"E:\Python_vscode\GDAL\GDAL_practice_Data\001_compositeAndNDVI\JiaYuGuan"
-pathout = r"E:\Python_vscode\GDAL\GDAL_practice_Data\001_compositeAndNDVI\JiaYuGuan"
+pathin = r"E:\data\001_compositeAndVI\JiaYuGuan"
+pathout = r"E:\data\001_compositeAndVI\JiaYuGuan"
 
 # Sentinel-2 真彩色波段 (B4, B3, B2)
 bands = {

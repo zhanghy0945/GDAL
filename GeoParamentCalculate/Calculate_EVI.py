@@ -93,8 +93,8 @@ def evi_calcul (pathin, pathout):
     print(f"EVI 计算完成，输出文件保存在: {evi_name}")
 
 if __name__ == "__main__":
-    pathin = r"E:\Python_vscode\GDAL\GDAL_practice_Data\001_compositeAndNDVI\JiaYuGuan"
-    pathout = r"E:\Python_vscode\GDAL\GDAL_practice_Data\001_compositeAndNDVI\EVI"
+    pathin = r"E:\data\001_compositeAndVI\JiaYuGuan"
+    pathout = r"E:\data\001_compositeAndVI\EVI"
     evi_calcul (pathin, pathout)
 
 
