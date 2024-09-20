@@ -4,8 +4,8 @@ from tqdm import tqdm
 import numpy as np
 
 # 输入输出路径
-pathin = r"E:\data\001_compositeAndVI\JiaYuGuan"
-pathout = r"E:\data\001_compositeAndVI\JiaYuGuan"
+pathin = r"F:\LULC_Article\2019\Sentinel-2_2019_process\LanZhou"
+pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_dataset\LanZhou"
 
 # Sentinel-2 真彩色波段 (B4, B3, B2)
 bands = {
@@ -58,8 +58,10 @@ b4_band = b4_band.astype(np.float32)
 b3_band = b3_band.astype(np.float32)
 b2_band = b2_band.astype(np.float32)
 
+
+
 # 创建输出图像 (真彩色, 3个波段, float32)
-out_name = os.path.join(pathout, "Sentinel-2_True2021_JiaYuGuan.tif")
+out_name = os.path.join(pathout, os.path.basename(fname).split(".")[0] + "_True.tif")
 driver = gdal.GetDriverByName('GTiff')
 out_data = driver.Create(out_name, xsize, ysize, 3, gdal.GDT_Float32)
 
@@ -67,16 +69,22 @@ out_data = driver.Create(out_name, xsize, ysize, 3, gdal.GDT_Float32)
 out_data.SetGeoTransform(geotransform)
 out_data.SetProjection(projection)
 
-# 写入红色、绿色、蓝色波段并添加进度条
+# 写入红色、绿色、蓝色波段并设置 NoData 值
 print("正在写入波段数据...")
 with tqdm(total=3, desc="写入波段", unit="band") as pbar:
-    out_data.GetRasterBand(1).WriteArray(b4_band)  # 红色
+    band1 = out_data.GetRasterBand(1)
+    band1.WriteArray(b4_band)  # 红色
+    band1.SetNoDataValue(np.nan)
     pbar.update(1)
     
-    out_data.GetRasterBand(2).WriteArray(b3_band)  # 绿色
+    band2 = out_data.GetRasterBand(2)
+    band2.WriteArray(b3_band)  # 绿色
+    band2.SetNoDataValue(np.nan)
     pbar.update(1)
     
-    out_data.GetRasterBand(3).WriteArray(b2_band)  # 蓝色
+    band3 = out_data.GetRasterBand(3)
+    band3.WriteArray(b2_band)  # 蓝色
+    band3.SetNoDataValue(np.nan)
     pbar.update(1)
 
 # 刷新缓存并关闭文件

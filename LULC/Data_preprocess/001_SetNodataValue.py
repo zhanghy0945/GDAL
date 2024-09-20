@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd 
 from numpy import nan as NA
 
-pathin =  r"F:\LULC_Article\2019\Sentinel-2_2020_origin\DingXi"
-pathout = r"F:\LULC_Article\2019\Sentinel-2_2020_process\DingXi"
+pathin =  r"F:\LULC_Article\2019\Sentinel-2_2019_origin\LanZhou"
+pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_process\LanZhou"
 filelist = os.listdir(pathin)
 print (filelist)
 for filename in filelist:
@@ -36,9 +36,10 @@ for filename in filelist:
         in_nodatavalue = in_band.GetNoDataValue()
         print ("nodata value == ", in_nodatavalue, "\n nodata value's type is: ", type(in_nodatavalue))
         inBand_Array = in_band.ReadAsArray()
-        inBand_Array[np.where(inBand_Array == 0)] =np.nan
+        inBand_Array[inBand_Array == 0] = np.nan
 
-        #data_setnull = np.where(np.isnan(inBand_Array), -9999, inBand_Array) #把nodata赋值为-999
+
+       # data_setnull = np.where(inBand_Array == 0, np.nan, inBand_Array) #把nodata赋值为-999
         print (inBand_Array [2356, 1526])
 
 #--------------------------------------out dataset setting------------------------------
@@ -49,7 +50,7 @@ for filename in filelist:
         outdataset.SetProjection(projection)
 
         out_band = outdataset.GetRasterBand(1)
-        #out_band.SetNoDataValue(np.nan)
+        out_band.SetNoDataValue(np.nan)
         out_band.WriteArray(inBand_Array)
         out_band.FlushCache()
 
