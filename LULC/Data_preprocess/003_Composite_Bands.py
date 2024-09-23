@@ -4,8 +4,8 @@ from tqdm import tqdm
 import numpy as np
 
 # 输入输出路径
-pathin = r"F:\LULC_Article\2019\Sentinel-2_2019_process\LanZhou"
-pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_dataset\LanZhou"
+pathin = r"F:\LULC_Article\2019\Sentinel-2_2019_process\DingXi"
+pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_dataset\DingXi"
 
 # Sentinel-2 真彩色波段 (B4, B3, B2)
 bands = {

@@ -5,8 +5,8 @@ import numpy as np
 import pandas as pd 
 from numpy import nan as NA
 
-pathin =  r"F:\LULC_Article\2019\Sentinel-2_2019_origin\LanZhou"
-pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_process\LanZhou"
+pathin =  r"F:\LULC_Article\2019\Sentinel-2_2019_origin\TaiZiShanMountain"
+pathout = r"F:\LULC_Article\2019\Sentinel-2_2019_process\TaiZiShanMountain"
 filelist = os.listdir(pathin)
 print (filelist)
 for filename in filelist:
@@ -40,7 +40,7 @@ for filename in filelist:
 
 
        # data_setnull = np.where(inBand_Array == 0, np.nan, inBand_Array) #把nodata赋值为-999
-        print (inBand_Array [2356, 1526])
+        #print (inBand_Array [2356, 1526])
 
 #--------------------------------------out dataset setting------------------------------
         outband_driver = gdal.GetDriverByName('GTiff')
