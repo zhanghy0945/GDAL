@@ -3,14 +3,14 @@ from osgeo import gdal
 from tqdm import tqdm
 
 # 输入和输出路径
-pathin = r"F:\LULC_Article\Sentinel-2_2020_origin\JiuQuan\Sentinel_B8"
-pathout = r"F:\LULC_Article\Sentinel-2_2020_process\JiuQuan"
+pathin = r"F:\LULC_Article\2021\ESA_v200\GanSu"
+pathout = r"F:\LULC_Article\2021\ESA_v200\GanSu"
 
 # 读取文件列表
 datalist = [os.path.join(pathin, file) for file in os.listdir(pathin) if file.endswith('.tif')]
 
 # 检查图像数量
-if len(datalist) < 25:
+if len(datalist) < 6:
     raise ValueError("至少需要25张图像进行拼接！")
 
 # 创建虚拟栅格数据集 (VRT) 的进度条函数
@@ -32,7 +32,7 @@ def translate_progress_callback(complete, message, cb_data):
     return 1
 
 # 导出为GeoTIFF文件
-out_name = os.path.join(pathout, "Sentinel2_2021B8_JiuQuan.tif")
+out_name = os.path.join(pathout, "ESAv200_2021_GanSu.tif")
 with tqdm(total=100, desc="导出拼接文件为GeoTIFF") as pbar:
     gdal.Translate(out_name, vrt_mosaic, format='GTiff', outputType=gdal.GDT_Float32, callback=translate_progress_callback)
 
